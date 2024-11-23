@@ -1,0 +1,37 @@
+﻿<div class="backdrop" id="backdrop">
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close" data-modal="loginModal">&times;</span>
+            <div class="modal-selector">
+                <span id="login-content-span" class="login-content-span active" data-modal="loginModal">Login</span>
+                <span id="register-content-span" class="register-content-span" data-modal="loginModal">Register</span>
+            </div>
+       
+            <div id="login-content" class="login-content active">
+                <h2>Login</h2>
+                <form method="post" asp-page="/Login">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required />
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required />
+                    <button type="submit">Login</button>
+                </form>
+
+            </div>
+            <div id="register-content" class="register-content">
+                <h2>Register</h2>
+                <form method="post" asp-page="/Register">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required />
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required />
+                    <label for="password">Repeat Password:</label>
+                    <input type="password" id="repeat-password" name="repeat-password" required />
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
