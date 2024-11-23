@@ -18,8 +18,71 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    display: flex;
+    flex-direction: column; 
+    min-height: 100vh; 
+    margin: 0; 
 }
+
+main {
+    flex: 1; 
+    padding: 20px; 
+    background-color: #f5f5f5; 
+}
+
+header {
+    background-color: #007bff; 
+    color: white; 
+    padding: 15px 20px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+    header h1 {
+        margin: 0;
+        font-size: 24px; 
+        text-align: center; 
+    }
+
+nav {
+    margin-top: 10px; 
+    display: flex; 
+    justify-content: center; 
+    gap: 15px; 
+}
+
+    nav a {
+        text-decoration: none; 
+        color: white; 
+        font-weight: bold; 
+        padding: 10px 20px; 
+        border-radius: 5px; 
+        transition: background-color 0.3s ease, transform 0.2s ease; 
+    }
+
+        nav a:hover {
+            background-color: #0056b3; 
+            transform: scale(1.05); 
+            cursor: pointer; 
+        }
+
+        nav a.active {
+            background-color: #0056b3; 
+            color: #fff; 
+        }
+
+footer {
+    background-color: #333; 
+    color: white; 
+    text-align: center; 
+    padding: 15px 0; 
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+    footer p {
+        margin: 0; 
+        font-size: 14px; 
+    }
+
 
 .backdrop {
     display: none; 
@@ -177,3 +240,56 @@ form {
         form button:hover {
             background-color: #0056b3; 
         }
+
+
+
+/* reservation table */
+#ReservationTable table {
+    width: 100%; 
+    border-collapse: collapse; 
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+}
+
+#ReservationTable th, #ReservationTable td {
+    width: 6%; 
+    height: 50px; 
+    border: 1px solid #ddd; 
+    padding: 0; 
+    text-align: center;
+    vertical-align: middle; 
+}
+
+#ReservationTable th {
+    background-color: #f4f4f4; 
+    font-weight: bold;
+    color: #333;
+}
+
+#ReservationTable td {
+    background-color: #fdfdfd; 
+    transition: background-color 0.2s ease, transform 0.2s ease; 
+}
+
+    #ReservationTable td:hover {
+        background-color: #ffe4b2; 
+        transform: scale(1.03);
+        cursor: pointer;
+    }
+
+/* Styles for reservation types */
+.reservation {
+    background-color: #add8e6; /* Light blue for reserved slots */
+    color: #333;
+}
+
+.myreservation {
+    background-color: #90ee90; /* Light green for user’s reservations */
+    color: #333;
+}
+
+.selectedcol {
+    background-color: #ffb6c1; 
+    border: 2px solid red; 
+}
+

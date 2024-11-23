@@ -8,20 +8,51 @@
 <link href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@2.9.6/build/vanilla-calendar.min.css" rel="stylesheet" />
 
 <!-- Vanilla Calendar Container -->
-<div id="calendar"></div>
+
 
 <!-- Vanilla Calendar JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@2.9.6/build/vanilla-calendar.min.js"></script>
 
+
+
+<div id="calendar"></div>
+
+<div id="ReservationTable">
+    <table>
+        <tr>
+            <th>Time/Court</th>
+            <th>09:00</th>
+            <th>09:30</th>
+            <th>10:00</th>
+            <th>10:30</th>
+            <th>11:00</th>
+            <th>11:30</th>
+            <th>12:00</th>
+            <th>12:30</th>
+            <th>13:00</th>
+            <th>13:30</th>
+            <th>14:00</th>
+            <th>14:30</th>
+            <th>15:00</th>
+            <th>15:30</th>
+            <th>16:00</th>
+        </tr>
+        <tbody id="reservationBody">
+            
+        </tbody>
+    </table>
+
+</div>
+
+
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Initialize the calendar
         const calendar = new VanillaCalendar('#calendar', {
-            type: 'default', // Optional: use 'default', 'month', 'week', etc.
+            type: 'default', 
             settings: {
-                lang: 'en', // Language (e.g., 'en' for English)
+                lang: 'en', 
             },
         });
-        calendar.init(); // Initialize the calendar
+        calendar.init(); 
     });
 </script>
