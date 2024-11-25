@@ -1,3 +1,5 @@
+using DataAccess;
+
 namespace BedmintonReservationSystem
 {
     public class Program
@@ -8,6 +10,12 @@ namespace BedmintonReservationSystem
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            builder.Configuration.AddUserSecrets<Program>();
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddSingleton(new DatabaseAccess(connectionString));
+
+
 
             var app = builder.Build();
 
