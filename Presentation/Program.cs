@@ -1,4 +1,9 @@
 using DataAccess;
+using DataAccess.Interfaces;
+using DataAccess.Repositories;
+using Microsoft.Extensions.DependencyInjection;
+using System.Data;
+using System.Runtime.Intrinsics.X86;
 
 namespace BedmintonReservationSystem
 {
@@ -13,9 +18,10 @@ namespace BedmintonReservationSystem
 
             builder.Configuration.AddUserSecrets<Program>();
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddSingleton(new DatabaseAccess(connectionString));
 
-
+            //TODO service builder
+            builder.Services.AddSingleton<IDatabaseAccess>(new DatabaseAccess(connectionString));
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             var app = builder.Build();
 
