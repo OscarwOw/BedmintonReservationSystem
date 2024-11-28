@@ -16,24 +16,24 @@ namespace DataAccess.Repositories
             _databaseAccess = databaseAccess;
         }
 
-        public List<UserEntity> GetUserEntities()
+        public List<User> GetUserEntities()
         {
             var query = "SELECT id, name, password FROM \"User\"";
-            return _databaseAccess.ExecuteQueryToList<UserEntity>(query);
+            return _databaseAccess.ExecuteQueryToList<User>(query);
         }
 
-        public UserEntity? GetUserEntityById(int id)
+        public User? GetUserEntityById(int id)
         {
             var query = "SELECT id, name, password FROM \"User\" WHERE id = @id";
             var parameters = new Dictionary<string, object> { { "@id", id } };
-            return _databaseAccess.ExecuteQueryToList<UserEntity>(query, parameters).FirstOrDefault();
+            return _databaseAccess.ExecuteQueryToList<User>(query, parameters).FirstOrDefault();
         }
 
-        public UserEntity? GetUserEntityByName(string name)
+        public User? GetUserByName(string name)
         {
             var query = "SELECT id, name, password FROM \"User\" WHERE name = @name";
             var parameters = new Dictionary<string, object> { { "@name", name } };
-            return _databaseAccess.ExecuteQueryToList<UserEntity>(query, parameters).FirstOrDefault();
+            return _databaseAccess.ExecuteQueryToList<User>(query, parameters).FirstOrDefault();
         }
     }
 }

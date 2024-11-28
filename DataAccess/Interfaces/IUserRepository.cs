@@ -9,8 +9,8 @@ namespace DataAccess.Interfaces
 {
     public interface IUserRepository
     {
-        List<UserEntity> GetUserEntities();
-        UserEntity? GetUserEntityById(int id);
-        UserEntity? GetUserEntityByName(string name);
+        List<User> GetUserEntities();
+        User? GetUserEntityById(int id);
+        User? GetUserByName(string name);
     }
 }

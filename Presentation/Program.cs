@@ -2,8 +2,9 @@ using DataAccess;
 using DataAccess.Interfaces;
 using DataAccess.Repositories;
 using Microsoft.Extensions.DependencyInjection;
+using Presentation;
 using System.Data;
-using System.Runtime.Intrinsics.X86;
+
 
 namespace BedmintonReservationSystem
 {
@@ -14,14 +15,13 @@ namespace BedmintonReservationSystem
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddRazorPages();
+            //builder.Services.AddRazorPages();
+            builder.Services.AddMvc();
 
             builder.Configuration.AddUserSecrets<Program>();
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-            //TODO service builder
-            builder.Services.AddSingleton<IDatabaseAccess>(new DatabaseAccess(connectionString));
-            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            DependencyInjectionContainer.AddProjectServices(builder.Services, connectionString);              
 
             var app = builder.Build();
 
@@ -39,7 +39,11 @@ namespace BedmintonReservationSystem
 
             app.UseAuthorization();
 
-            app.MapRazorPages();
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}"
+            );
+
 
             app.Run();
         }
