@@ -12,22 +12,25 @@ namespace Application.BusinessLogic
     public class LoginService : ILoginService
     {
         IUserRepository _userRepository;
-        public LoginService(IUserRepository userRepository) {
+        ILoginCacheService _loginCacheService;
+        public LoginService(IUserRepository userRepository, ILoginCacheService loginCacheService) {
             _userRepository = userRepository;
+            _loginCacheService = loginCacheService;
         }   
 
-        public string Login(string name, string password)
+        public (int, int, int) Login(string name, string password, int authToken)//
         {
             User? user = _userRepository.GetUserByName(name);
             if ( user == null)
             {
-                return "user or password does not exists";
+                return (-1, -1, -1); //TODO struct
             }
             if (name == user.Name && password == user.Password)
             {
-                return "success";
+                _loginCacheService.AddOrUpdateUser(user.Id, authToken);
+                return (1, user.Id, authToken);
             }
-            return "user or password does not exists";
+            return (-1, -1, -1);
         }
     }
 }

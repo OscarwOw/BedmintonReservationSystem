@@ -12,6 +12,7 @@ namespace Presentation
         {
             //singletons
             services.AddSingleton<IDatabaseAccess>(new DatabaseAccess(connectionString));
+            services.AddSingleton<ILoginCacheService>(new LoginCacheService());
             
 
             //Repositories
