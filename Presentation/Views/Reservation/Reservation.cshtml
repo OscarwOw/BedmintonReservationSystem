@@ -2,6 +2,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Reservations";
 }
+@model Dictionary<int, List<DataAccess.Models.Reservation>>
 
 <!-- Vanilla Calendar CSS -->
 <link href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@2.9.6/build/vanilla-calendar.min.css" rel="stylesheet" />
@@ -18,40 +19,44 @@
 
 <div id="ReservationTable">
     <table>
-        <tr>
-            <th>Time/Court</th>
-            <th>09:00</th>
-            <th>09:30</th>
-            <th>10:00</th>
-            <th>10:30</th>
-            <th>11:00</th>
-            <th>11:30</th>
-            <th>12:00</th>
-            <th>12:30</th>
-            <th>13:00</th>
-            <th>13:30</th>
-            <th>14:00</th>
-            <th>14:30</th>
-            <th>15:00</th>
-            <th>15:30</th>
-            <th>16:00</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Time/Court</th>
+                @foreach (var court in Model.Keys)
+                {
+                    <th>Court @court</th>
+                }
+            </tr>
+        </thead>
         <tbody id="reservationBody">
-            
+            @for (var hour = 6; hour <= 21; hour++)
+            {
+                <tr>
+                    <td>@hour:00</td> 
+                    @foreach (var court in Model.Keys)
+                    {
+                        var reservation = Model[court].FirstOrDefault(r => r.StartTime.Hour == hour);
+                        if (reservation != null)
+                        {
+                            <td class="reservation reservation-cell"
+                                data-userid="@reservation.UserId"
+                                data-reservationid="@reservation.Id"
+                            >
+                                Booked
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="reservation-cell"></td>
+                        }
+                    }
+                </tr>
+            }
         </tbody>
     </table>
 
 </div>
 
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const calendar = new VanillaCalendar('#calendar', {
-            type: 'default', 
-            settings: {
-                lang: 'en', 
-            },
-        });
-        calendar.init(); 
-    });
-</script>
+<script src="~/js/Reservation.js"></script>
+    

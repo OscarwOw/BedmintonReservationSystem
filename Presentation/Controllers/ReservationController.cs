@@ -12,7 +12,11 @@ namespace Presentation.Controllers
         }
         public IActionResult Reservation()
         {
-            return View();
+            var today = DateTime.Today;
+            var location = "Building A";
+
+            var reservations = _reservationService.GetReservationsByDateAndLocation(today, location);
+            return View(reservations);
         }
     }
 }

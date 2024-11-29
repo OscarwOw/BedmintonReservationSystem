@@ -20,7 +20,7 @@ namespace DataAccess.Repositories
         {
             var query = @"
                 SELECT 
-                    r.id, r.userid, r.courtid, r.starttime, r.endtime, 
+                    r.id, r.userid, r.courtid, r.starttime,  
                     u.id AS UserId, u.name AS UserName, u.password AS UserPassword,
                     c.id AS CourtId, c.name AS CourtName, c.location AS CourtLocation
                 FROM ""Reservation"" r
@@ -36,7 +36,7 @@ namespace DataAccess.Repositories
         {
             var query = @"
                 SELECT 
-                    r.id, r.userid, r.courtid, r.starttime, r.endtime
+                    r.id, r.userid, r.courtid, r.starttime
                 FROM ""Reservation"" r
                 WHERE r.courtid = @courtid";
 
@@ -48,7 +48,7 @@ namespace DataAccess.Repositories
         {
             var query = @"
                 SELECT 
-                    r.id, r.userid, r.courtid, r.starttime, r.endtime
+                    r.id, r.userid, r.courtid, r.starttime
                 FROM ""Reservation"" r
                 WHERE DATE(r.starttime) = @date";
 
@@ -60,7 +60,7 @@ namespace DataAccess.Repositories
         {
             var query = @"
                 SELECT 
-                    r.id, r.userid, r.courtid, r.starttime, r.endtime
+                    r.id, r.userid, r.courtid, r.starttime
                 FROM ""Reservation"" r
                 WHERE r.userid = @userid";
 
@@ -72,7 +72,7 @@ namespace DataAccess.Repositories
         {
             var query = @"
                 SELECT 
-                    r.id, r.userid, r.courtid, r.starttime, r.endtime
+                    r.id, r.userid, r.courtid, r.starttime
                 FROM ""Reservation"" r
                 WHERE r.userid = @userid AND DATE(r.starttime) = @date";
 
@@ -88,10 +88,11 @@ namespace DataAccess.Repositories
         {
             var query = @"
                 SELECT 
-                    r.id, r.userid, r.courtid, r.starttime, r.endtime
+                    r.id, r.userid, r.courtid, r.starttime
                 FROM ""Reservation"" r";
 
             return _databaseAccess.ExecuteQueryToList<Reservation>(query);
         }
+
     }
 }

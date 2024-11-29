@@ -13,7 +13,6 @@ namespace DataAccess.Models
         public int UserId { get; set; }
         public int CourtId { get; set; }
         public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
 
         //direct references
         public User? User { get; set; }
