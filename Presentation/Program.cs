@@ -14,6 +14,9 @@ namespace BedmintonReservationSystem
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddSwaggerGen();
+
+
             // Add services to the container.
             //builder.Services.AddRazorPages();
             builder.Services.AddMvc();
@@ -31,6 +34,10 @@ namespace BedmintonReservationSystem
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

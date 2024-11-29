@@ -9,9 +9,9 @@
        
             <div id="login-content" class="login-content active">
                 <h2>Login</h2>
-                <form method="post" asp-page="/Login">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required />
+                <form id="loginForm">
+                    <label for="name">Username:</label>
+                    <input type="text" id="name" name="name" required />
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" required />
                     <button type="submit">Login</button>
@@ -33,5 +33,7 @@
         </div>
     </div>
 </div>
+
+<script src="~/js/login.js"></script>
 
 
