@@ -1,5 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
-    /* nav buttons */
+﻿function initializeSiteEvents() {
     const loginButton = document.getElementById('openLogin');
     const registerButton = document.getElementById('openRegister');
 
@@ -18,6 +17,9 @@
     /* backdrop */
     const backdrop = document.getElementById('backdrop');
 
+    /* nav buttons */
+
+
     /* navigation buttons events */
     if (loginButton) {
         loginButton.addEventListener('click', (event) => {
@@ -34,6 +36,7 @@
             backdrop.classList.add('show')
         });
     }
+
     if (registerButton) {
         registerButton.addEventListener('click', (event) => {
             event.preventDefault();
@@ -98,7 +101,25 @@
 
     if (loginModal) {
         loginModal.addEventListener('click', (event) => {
-            event.stopPropagation(); 
+            event.stopPropagation();
         });
     }
+
+}
+window.initializeSiteEvents = initializeSiteEvents;
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    initializeSiteEvents();
+    console.log("loading auth.js");
+
+    // Dynamically load auth.js
+    const script = document.createElement('script');
+    script.src = '/js/auth.js';
+    script.defer = true; 
+    document.body.appendChild(script);
 });
+
+
+

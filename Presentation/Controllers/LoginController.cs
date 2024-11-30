@@ -24,7 +24,7 @@ namespace Presentation.Controllers
                 return BadRequest(new { success = false, message = "Invalid input" });
             }
 
-            (int, int, int) result = _loginService.Login(model.Name, model.Password, model.AuthToken); //success id authtoken
+            (int, int, string) result = _loginService.Login(model.Name, model.Password, model.AuthToken); //success id authtoken
             if (result.Item1 > 0)
             {
                 return Ok(new { success = true, message = "Login successful!", id = result.Item2, authToken = result.Item3 });

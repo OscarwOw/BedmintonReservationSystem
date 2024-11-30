@@ -2,6 +2,8 @@
 {
     public interface ILoginService
     {
-        public (int, int, int) Login(string name, string password, int authToken);
+        public (int, int, string) Login(string name, string password, int authToken);
+        public bool Authorize(string token);
+
     }
 }

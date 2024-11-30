@@ -10,11 +10,11 @@ namespace Application.BusinessLogic
 {
     public class LoginCacheService : ILoginCacheService
     {
-        private readonly ConcurrentDictionary<int, (DateTime loginTime, DateTime refreshTime, int authToken)> _cache;
+        private ConcurrentDictionary<int, (DateTime loginTime, DateTime refreshTime, string authToken)> _cache;
 
         public LoginCacheService()
         {
-            _cache = new ConcurrentDictionary<int, (DateTime loginTime, DateTime refreshTime, int authToken)>();
+            _cache = new ConcurrentDictionary<int, (DateTime loginTime, DateTime refreshTime, string authToken)>();
         }
 
         public bool IsUserLoggedIn(int userId)
@@ -22,7 +22,7 @@ namespace Application.BusinessLogic
             return _cache.ContainsKey(userId);
         }
 
-        public void AddOrUpdateUser(int userId, int authToken)
+        public void AddOrUpdateUser(int userId, string authToken)
         {
             _cache[userId] = (DateTime.Now, DateTime.Now, authToken);
         }
@@ -32,9 +32,26 @@ namespace Application.BusinessLogic
             _cache.TryRemove(userId, out _);
         }
 
-        public (DateTime loginTime, DateTime refreshTime, int authToken)? GetUserInfo(int userId)
+        public (DateTime loginTime, DateTime refreshTime, string authToken)? GetUserInfo(int userId)
         {
             return _cache.TryGetValue(userId, out var info) ? info : null;
+        }
+
+        public bool isAuthTokenValid(string token)
+        {
+            try
+            {
+                int[] tokenparts = token.Split('t').Select(c => Int32.Parse(c)).ToArray();
+                if (_cache[tokenparts[0]].authToken == token)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
