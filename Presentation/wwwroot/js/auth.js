@@ -36,6 +36,7 @@ function fillingLinks() {
 
                     initializeSiteEvents();
                     fillingLinks();
+                    window.attachLogoutEvent();
                     window.attachLoginEvent();
                 } else {
                     console.error('Navigation failed:', await response.json());

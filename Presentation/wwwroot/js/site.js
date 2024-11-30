@@ -104,9 +104,56 @@
             event.stopPropagation();
         });
     }
-
 }
+
+async function performLogout() {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+        console.warn('No auth token found. Logout skipped.');
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/LoginApi/Logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(token),
+        });
+
+        if (response.ok) {
+            console.log('Logout successful');
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userId');
+            window.location.href = '/Home';
+        } else {
+            console.error('Logout failed:', await response.text());
+        }
+    } catch (error) {
+        console.error('Error during logout:', error);
+    }
+}
+
+function attachLogoutEvent() {
+    const logoutLink = document.getElementById('logout');
+
+    if (logoutLink) {
+        logoutLink.addEventListener('click', async (event) => {
+            event.preventDefault(); 
+            console.log('Logout link clicked');
+            await performLogout(); 
+        });
+    } else {
+        console.warn('Logout link not found.');
+    }
+}
+
+
 window.initializeSiteEvents = initializeSiteEvents;
+window.attachLogoutEvent = attachLogoutEvent;
+
+
 
 
 

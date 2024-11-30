@@ -53,5 +53,32 @@ namespace Presentation.Controllers
 
             return View(reservations);
         }
+
+        [HttpGet("Reservation/MyReservations")] 
+        public IActionResult MyReservations()
+        {
+            var authHeader = Request.Headers["Authorization"].ToString();
+            if (!string.IsNullOrEmpty(authHeader))
+            {
+                try
+                {
+                    string[] headerParts = authHeader.Split(' ');
+                    if (_loginService.Authorize(headerParts[1]))
+                    {
+                        var userId = int.Parse(headerParts[1].Split('t')[0]);
+                        var userReservations = _reservationService.GetReservationsByUser(userId);
+                        ViewBag.IsAuthorized = true;
+                        return View(userReservations); 
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("error in auth:", ex);
+                }
+            }
+            ViewBag.IsAuthorized = false;
+            Response.Headers.Add("Remove-AuthToken", "true");
+            return View("Unauthorized");
+        }
     }
 }

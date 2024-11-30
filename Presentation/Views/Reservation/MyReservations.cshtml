@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Reservations";
+}
+@model List<DataAccess.Models.Reservation>
+
+
+<div>
+    @foreach (var reservation in Model){
+        <h2>@reservation.StartTime</h2>
+    }
+
+</div>

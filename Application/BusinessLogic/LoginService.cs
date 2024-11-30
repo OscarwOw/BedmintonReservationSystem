@@ -55,5 +55,11 @@ namespace Application.BusinessLogic
             }
             return (-1, -1, "");
         }
+
+        public void Logout(string token)
+        {
+            int userid = Int32.Parse(token.Split("t")[0]);
+            _loginCacheService.RemoveUser(userid);
+        }
     }
 }

@@ -34,5 +34,12 @@ namespace Presentation.Controllers
                 return BadRequest(new { success = false, message = "Invalid username or password" });
             }
         }
+
+        [HttpPost("Logout")]
+        public IActionResult Logout([FromBody] string token)
+        {
+            _loginService.Logout(token);
+            return Ok();
+        }
     }
 }

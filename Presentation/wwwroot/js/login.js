@@ -4,7 +4,7 @@ window.attachLoginEvent = function () {
         event.preventDefault();
 
 
-        const authToken = Math.floor(Math.random() * 2147483647) //max int
+        const authToken = Math.floor(Math.random() * 2147483647) 
 
         const name = document.getElementById("name").value;
         const password = document.getElementById("password").value;
@@ -27,8 +27,13 @@ window.attachLoginEvent = function () {
             console.log("user id: ", result.id);
             console.log("authToken: ", result.authToken);
 
-            localStorage.setItem("userId", result.id); // Added saving userId
-            localStorage.setItem("authToken", result.authToken); // Added saving authToken
+            localStorage.setItem("userId", result.id); 
+            localStorage.setItem("authToken", result.authToken); 
+
+            const homeLink = document.querySelector('a[href="/Home"]');
+            if (homeLink) {
+                homeLink.click(); 
+            }
         } else {
             const error = await response.json();
             feedbackDiv.textContent = error.message;
@@ -38,5 +43,5 @@ window.attachLoginEvent = function () {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    attachLoginEvent(); // Initial call when the page loads
+    attachLoginEvent(); 
 });
