@@ -11,6 +11,7 @@ namespace DataAccess.Interfaces
     {
         DataTable ExecuteQuery(string query, IDictionary<string, object> parameters = null);
         List<T> ExecuteQueryToList<T>(string query, IDictionary<string, object> parameters = null) where T : class, new();
+        public int ExecuteNonQuery(string query, IDictionary<string, object> parameters = null);
     }
 }
 

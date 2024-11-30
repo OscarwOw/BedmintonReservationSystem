@@ -94,5 +94,36 @@ namespace DataAccess.Repositories
             return _databaseAccess.ExecuteQueryToList<Reservation>(query);
         }
 
+        public bool AddReservation(Reservation reservation)
+        {
+            var query = @" INSERT INTO ""Reservation"" (""UserId"", ""CourtId"", ""StartTime"") VALUES (@UserId, @CourtId, @StartTime)";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@UserId", reservation.UserId },
+                { "@CourtId", reservation.CourtId },
+                { "@StartTime", reservation.StartTime }
+            };
+
+            var rowsAffected = _databaseAccess.ExecuteNonQuery(query, parameters);
+            return rowsAffected > 0; 
+        }
+
+
+        public bool DeleteReservation(int reservationId)
+        {
+            var query = @" DELETE FROM ""Reservation""  WHERE ""Id"" = @Id";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@Id", reservationId }
+            };
+
+            var rowsAffected = _databaseAccess.ExecuteNonQuery(query, parameters);
+            return rowsAffected > 0; 
+        }
+
+
+
     }
 }

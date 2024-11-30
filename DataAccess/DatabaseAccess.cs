@@ -57,5 +57,23 @@ namespace DataAccess
 
             return list;
         }
+
+
+        public int ExecuteNonQuery(string query, IDictionary<string, object> parameters = null)
+        {
+            using var connection = new NpgsqlConnection(_connectionString);
+            using var command = new NpgsqlCommand(query, connection);
+
+            if (parameters != null)
+            {
+                foreach (var param in parameters)
+                {
+                    command.Parameters.AddWithValue(param.Key, param.Value ?? DBNull.Value);
+                }
+            }
+
+            connection.Open();
+            return command.ExecuteNonQuery();
+        }
     }
 }

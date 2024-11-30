@@ -12,5 +12,6 @@ namespace DataAccess.Interfaces
         List<User> GetUserEntities();
         User? GetUserEntityById(int id);
         User? GetUserByName(string name);
+        bool CreateUser(User user);
     }
 }

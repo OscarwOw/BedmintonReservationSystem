@@ -16,5 +16,7 @@ namespace DataAccess.Interfaces
         List<Reservation> GetReservationsByUser(int userId);
         List<Reservation> GetReservationsByDate(DateTime dateTime);
         List<Reservation> GetReservationsByUserByDate(int userId, DateTime dateTime);
+        public bool AddReservation(Reservation reservation);
+        public bool DeleteReservation(int reservationId);
     }
 }

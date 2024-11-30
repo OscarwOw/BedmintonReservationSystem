@@ -35,5 +35,20 @@ namespace DataAccess.Repositories
             var parameters = new Dictionary<string, object> { { "@name", name } };
             return _databaseAccess.ExecuteQueryToList<User>(query, parameters).FirstOrDefault();
         }
+
+        public bool CreateUser(User user)
+        {
+            var query = @"INSERT INTO ""User"" (""Name"", ""Password"") VALUES (@Name, @Password)";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@Name", user.Name },
+                { "@Password", user.Password }
+            };
+
+            var rowsAffected = _databaseAccess.ExecuteNonQuery(query, parameters);
+            return rowsAffected > 0;
+        }
+
     }
 }
