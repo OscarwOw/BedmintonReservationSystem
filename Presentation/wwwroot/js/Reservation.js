@@ -25,6 +25,47 @@
         
     });
     injectReservationCellEvents();
+
+
+
+    document.querySelectorAll(".reservation-cell").forEach(cell => {
+        cell.addEventListener("click", function () {
+            const reservationId = this.dataset.reservationid; // Get reservationId from data attribute
+            const userId = this.dataset.userid; // Get userId from data attribute
+
+            if (reservationId) {
+                // Dynamically create a form
+                const form = document.createElement("form");
+                form.action = "/Reservation"; // The action URL
+                form.method = "post";
+
+                // Add Anti-Forgery Token
+                const antiForgeryTokenInput = document.createElement("input");
+                antiForgeryTokenInput.type = "hidden";
+                antiForgeryTokenInput.name = "__RequestVerificationToken";
+                antiForgeryTokenInput.value = document.querySelector('input[name="__RequestVerificationToken"]').value;
+                form.appendChild(antiForgeryTokenInput);
+
+                // Add reservationId as hidden input
+                const reservationIdInput = document.createElement("input");
+                reservationIdInput.type = "hidden";
+                reservationIdInput.name = "reservationId";
+                reservationIdInput.value = reservationId;
+                form.appendChild(reservationIdInput);
+
+                const authTokenInput = document.createElement("input");
+                authTokenInput.type = "hidden";
+                authTokenInput.name = "token";
+                authTokenInput.value = localStorage.getItem("authToken");
+                form.appendChild(authTokenInput);
+
+                // Add the form to the body and submit it
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+    });
+
    
 });
 

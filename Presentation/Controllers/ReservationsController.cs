@@ -71,5 +71,30 @@ namespace Presentation.Controllers
             Response.Headers.Add("Remove-AuthToken", "true");
             return View("Unauthorized");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/Reservation")]
+        public IActionResult Reservation(string token, int reservationId)
+        {
+            if (string.IsNullOrEmpty(token) || !_loginService.Authorize(token))
+            {
+                ViewBag.IsAuthorized = false;
+                return View("Unauthorized");
+            }
+
+            var reservation = _reservationService.GetReservationById(reservationId);
+
+
+            ViewBag.IsAuthorized = true;
+            if (reservation.UserId != Int32.Parse(token.Split('t')[0]))
+            {
+                return View("Unauthorized");
+            }
+
+
+            return View(reservation);
+        }
+
     }
 }

@@ -49,5 +49,10 @@ namespace Application.BusinessLogic
         {
             return _reservationRepository.GetReservationsByUser(UserId);
         }
+
+        public Reservation GetReservationById(int ReservationId)
+        {
+            return _reservationRepository.GetReservationById(ReservationId);
+        }
     }
 }

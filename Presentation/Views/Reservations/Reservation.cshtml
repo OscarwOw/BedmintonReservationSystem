@@ -1,0 +1,17 @@
+﻿@model DataAccess.Models.Reservation
+
+@{
+    ViewData["Title"] = "Reservation Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Reservation Details</h1>
+
+<div>
+    <p><strong>Reservation ID:</strong> @Model.Id</p>
+    <p><strong>User ID:</strong> @Model.UserId</p>
+    <p><strong>Start Time:</strong> @Model.StartTime</p>
+    <p><strong>Court:</strong> @Model.Court</p>
+</div>
+
+<a href="#">Delete</a>

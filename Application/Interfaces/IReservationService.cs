@@ -13,5 +13,6 @@ namespace Application.Interfaces
         public List<Reservation> GetReservationsByDate(DateTime date);
         public List<Reservation> GetReservationsByUser(int UserId);
         public Dictionary<int, List<Reservation>> GetReservationsByDateAndLocation(DateTime date, string location);
+        public Reservation GetReservationById(int ReservationId);
     }
 }
