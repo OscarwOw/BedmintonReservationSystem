@@ -104,6 +104,7 @@
             event.stopPropagation();
         });
     }
+    attachLogoutEvent();
 }
 
 async function performLogout() {
@@ -126,7 +127,24 @@ async function performLogout() {
             console.log('Logout successful');
             localStorage.removeItem('authToken');
             localStorage.removeItem('userId');
-            window.location.href = '/Home';
+            const form = document.createElement("form");
+            form.action = "/Home"; 
+            form.method = "post";
+
+            const antiForgeryTokenInput = document.createElement("input");
+            antiForgeryTokenInput.type = "hidden";
+            antiForgeryTokenInput.name = "__RequestVerificationToken";
+            antiForgeryTokenInput.value = document.querySelector('input[name="__RequestVerificationToken"]').value;
+            form.appendChild(antiForgeryTokenInput);
+
+            const authTokenInput = document.createElement("input");
+            authTokenInput.type = "hidden";
+            authTokenInput.name = "token";
+            authTokenInput.value = localStorage.getItem("authToken");
+            form.appendChild(authTokenInput);
+
+            document.body.appendChild(form);
+            form.submit();
         } else {
             console.error('Logout failed:', await response.text());
         }
@@ -151,7 +169,6 @@ function attachLogoutEvent() {
 
 
 window.initializeSiteEvents = initializeSiteEvents;
-window.attachLogoutEvent = attachLogoutEvent;
 
 
 
