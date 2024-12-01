@@ -5,7 +5,24 @@
     <title>@ViewData["Title"] - My App</title>
     <link rel="stylesheet" href="/css/site.css" />
     <script src="/js/site.js" defer></script>
-   
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const token = localStorage.getItem("authToken");
+
+            if (!token) {
+                alert("Token is missing in localStorage!");
+                return;
+            }
+
+            const homeTokenInput = document.getElementById("homeToken");
+            const reservationTokenInput = document.getElementById("reservationToken");
+            const myReservationsTokenInput = document.getElementById("myReservationsToken");
+
+            if (homeTokenInput) homeTokenInput.value = token;
+            if (reservationTokenInput) reservationTokenInput.value = token;
+            if (myReservationsTokenInput) myReservationsTokenInput.value = token;
+        });
+    </script>
 
 </head>
 <body>
@@ -13,20 +30,52 @@
         <h1>My Website Header</h1>
         <nav>
             @if (ViewBag.IsAuthorized != null && (bool)ViewBag.IsAuthorized){
-                <a href="/Home" data-auth>Home</a>
-                <a href="/Reservation/reservation" data-auth>Reservations</a>
+                <form id="homeForm" asp-action="Index" asp-controller="Home" method="post" style="display:inline;">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="homeToken" name="token" value="" />
+                    <button type="submit" >
+                        Home
+                    </button>
+                </form>
 
-                <a href="/Reservation/MyReservations" data-auth>MyReservations</a>
+                <form id="reservationForm" asp-action="Reservations" asp-controller="Reservations" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="reservationToken" name="token" value="" />
+                    <button type="submit">Reservations</button>
+                </form>
+
+                <form id="myReservationsForm" asp-action="MyReservations" asp-controller="Reservations" method="post" style="display:inline;">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="myReservationsToken" name="token" value="" />
+                    <button type="submit">My Reservations</button>
+                </form>
+
+
 
 
                 <a href="#" id="logout">Logout</a>
             }
             else{
-                <a href="/Home" data-auth>Home</a>
-                <a href="/Reservation/reservation" data-auth>Reservations</a>
+                <form id="homeForm" asp-action="Index" asp-controller="Home" method="post" style="display:inline;">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="homeToken" name="token" value="" />
+                    <button type="submit" >
+                        Home
+                    </button>
+                </form>
+
+                <form id="reservationForm" asp-action="Reservations" asp-controller="Reservations" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="reservationToken" name="token" value="" />
+                    <button type="submit">Reservations</button>
+                </form>
+                
 
                 <a href="#" id="openLogin">Login</a>
                 <a href="#" id="openRegister">Register</a>
+
+
+
             }
         </nav>
     </header>

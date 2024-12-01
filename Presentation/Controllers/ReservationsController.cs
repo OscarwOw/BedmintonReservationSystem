@@ -4,29 +4,28 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
 {
-    public class ReservationController : Controller
+    public class ReservationsController : Controller
     {
         private IReservationService _reservationService;
         private ILoginService _loginService;
-        public ReservationController(IReservationService reservationService, ILoginService loginService)
+        public ReservationsController(IReservationService reservationService, ILoginService loginService)
         {
             _reservationService = reservationService;
             _loginService = loginService;
         }
-        public IActionResult Reservation()
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Reservations(string token)
         {
             var today = DateTime.Today;
             var location = "Building A";
 
             var reservations = _reservationService.GetReservationsByDateAndLocation(today, location);
-
-            var authHeader = Request.Headers["Authorization"].ToString();
-            if (!string.IsNullOrEmpty(authHeader))
+            if (!string.IsNullOrEmpty(token))
             {
-                try
-                {
-                    string[] headerParts = authHeader.Split(' ');
-                    if (_loginService.Authorize(headerParts[1]))
+
+                    if (_loginService.Authorize(token))
                     {
                         ViewBag.IsAuthorized = true;
                         Console.WriteLine("authorized");
@@ -37,13 +36,6 @@ namespace Presentation.Controllers
                         ViewBag.IsAuthorized = false;
                         Console.WriteLine("no authorized");
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("error in auth:", ex);
-                    Response.Headers.Add("Remove-AuthToken", "true");
-                    ViewBag.IsAuthorized = false;
-                }
             }
             else
             {
@@ -54,18 +46,17 @@ namespace Presentation.Controllers
             return View(reservations);
         }
 
-        [HttpGet("Reservation/MyReservations")] 
-        public IActionResult MyReservations()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult MyReservations(string token)
         {
-            var authHeader = Request.Headers["Authorization"].ToString();
-            if (!string.IsNullOrEmpty(authHeader))
+            if (!string.IsNullOrEmpty(token))
             {
                 try
                 {
-                    string[] headerParts = authHeader.Split(' ');
-                    if (_loginService.Authorize(headerParts[1]))
+                    if (_loginService.Authorize(token))
                     {
-                        var userId = int.Parse(headerParts[1].Split('t')[0]);
+                        var userId = int.Parse(token.Split('t')[0]);
                         var userReservations = _reservationService.GetReservationsByUser(userId);
                         ViewBag.IsAuthorized = true;
                         return View(userReservations); 

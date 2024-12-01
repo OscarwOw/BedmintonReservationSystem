@@ -11,42 +11,29 @@ namespace Presentation.Controllers
             _loginService = loginService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string token)
         {
-            var authHeader = Request.Headers["Authorization"].ToString();
-
-
-
-            if (!string.IsNullOrEmpty(authHeader))
+            if (!string.IsNullOrEmpty(token))
             {
-                try
+
+                if (_loginService.Authorize(token))
                 {
-                    string[] headerParts = authHeader.Split(' ');
-                    if (_loginService.Authorize(headerParts[1]))
-                    {
-                        ViewBag.IsAuthorized = true;
-                        Console.WriteLine("authorized");
-                    }
-                    else
-                    {
-                        Response.Headers.Add("Remove-AuthToken", "true");
-                        ViewBag.IsAuthorized = false;
-                        Console.WriteLine("no authorized");
-                    }
+                    ViewBag.IsAuthorized = true;
+                    Console.WriteLine("authorized");
                 }
-                catch (Exception ex)
+                else
                 {
-                    Console.WriteLine("error in auth:", ex);
                     Response.Headers.Add("Remove-AuthToken", "true");
                     ViewBag.IsAuthorized = false;
+                    Console.WriteLine("no authorized");
                 }
             }
             else
             {
-                Console.WriteLine("authheader was empty");
                 ViewBag.IsAuthorized = false;
                 Response.Headers.Add("Remove-AuthToken", "true");
             }
+
             return View();
         }
     }

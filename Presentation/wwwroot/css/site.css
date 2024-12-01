@@ -50,6 +50,35 @@ nav {
     gap: 15px; 
 }
 
+    nav form {
+        display: inline; 
+    }
+
+
+        nav form button {
+            background: none; 
+            border: none; 
+            text-decoration: none; 
+            color: white; 
+            font-weight: bold; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            transition: background-color 0.3s ease, transform 0.2s ease; 
+            cursor: pointer; 
+        }
+
+            nav form button:hover {
+                background-color: #0056b3;
+                transform: scale(1.05);
+            }
+
+            nav form button.active {
+                background-color: #0056b3;
+                color: #fff;
+            }
+
+
+
     nav a {
         text-decoration: none; 
         color: white; 

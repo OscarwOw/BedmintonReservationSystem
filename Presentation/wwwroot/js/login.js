@@ -30,10 +30,24 @@ window.attachLoginEvent = function () {
             localStorage.setItem("userId", result.id); 
             localStorage.setItem("authToken", result.authToken); 
 
-            const homeLink = document.querySelector('a[href="/Home"]');
-            if (homeLink) {
-                homeLink.click(); 
-            }
+            const form = document.createElement("form");
+            form.action = "/Home";
+            form.method = "post";
+
+            const antiForgeryTokenInput = document.createElement("input");
+            antiForgeryTokenInput.type = "hidden";
+            antiForgeryTokenInput.name = "__RequestVerificationToken";
+            antiForgeryTokenInput.value = document.querySelector('input[name="__RequestVerificationToken"]').value;
+            form.appendChild(antiForgeryTokenInput);
+
+            const authTokenInput = document.createElement("input");
+            authTokenInput.type = "hidden";
+            authTokenInput.name = "token";
+            authTokenInput.value = result.authToken;
+            form.appendChild(authTokenInput);
+
+            document.body.appendChild(form);
+            form.submit();
         } else {
             const error = await response.json();
             feedbackDiv.textContent = error.message;
