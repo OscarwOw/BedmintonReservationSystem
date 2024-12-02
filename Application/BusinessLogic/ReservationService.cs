@@ -88,7 +88,11 @@ namespace Application.BusinessLogic
             {
                 return false;
             }
-            int UserId = Int32.Parse(token.Split('t')[0]);
+            var tokenParts = token.Split('t');
+            if (tokenParts.Length < 1 || !Int32.TryParse(tokenParts[0], out int UserId))
+            {
+                return false; 
+            }
             (DateTime, DateTime, string)? userinfo = _loginCacheService.GetUserInfo(UserId);
             if (userinfo.HasValue)
             {
@@ -110,10 +114,11 @@ namespace Application.BusinessLogic
 
         private bool checkReservationValues(Reservation reservation)
         {
-            if(reservation.StartTime != DateTime.Now) // is whole hour
+            if (reservation.StartTime.Minute != 0 || reservation.StartTime.Second != 0)
             {
-                return false;
+                return false; 
             }
+
             Court court = _courtRepository.GetCourtById(reservation.CourtId);
             if(court is null)
             {

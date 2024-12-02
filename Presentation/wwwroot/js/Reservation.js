@@ -16,11 +16,17 @@
     calendarContainer.addEventListener('click', async (event) => {
         let selectedbtn = calendarContainer.querySelector('.vanilla-calendar-day__btn_selected');
         if (selectedbtn != null) {
-        const selectedDate = selectedbtn.getAttribute('data-calendar-day');
+            const selectedDate = selectedbtn.getAttribute('data-calendar-day');
             if (selectedDate) {
                 await fetchReservations(selectedDate);
             }
-            
+        }
+        else {
+            const today = new Date();
+            const selectedDate = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+            if (selectedDate) {
+                await fetchReservations(selectedDate);
+            }
         }
         
     });
@@ -92,26 +98,42 @@ const injectReservationCellEvents = () => {
         cell.addEventListener("click", function () {
             const reservationId = this.dataset.reservationid; 
             const userId = this.dataset.userid;
-            const courtId = this.dataset.courtId;
+            const courtId = this.dataset.courtid;
 
 
             let calendarContainer = document.querySelector('#calendar');
             let selectedbtn = calendarContainer.querySelector('.vanilla-calendar-day__btn_selected');
             let selectedDate;
+
+            const timeCell = cell.parentElement.querySelector("td").textContent.trim();
+
+
+            console.log("selected date: ", selectedbtn);
             if (selectedbtn != null) {
                 selectedDate = selectedbtn.getAttribute('data-calendar-day');
 
+                if (localStorage.getItem("authToken")) {
+                    openModal(courtId, `${selectedDate} ${timeCell}`);
+                }
+
+                console.log("date was selected");
+
             }
             else {
+                
+                // Get today's date in YYYY-MM-DD format
                 const today = new Date();
-                const result = new Date(today.getFullYear(), today.getMonth(), today.getDay());
-                selectedDate = result.toISOString().split('T')[0];
-                openModal(courtId, selectedDate);
+                selectedDate = today.toISOString().split("T")[0]; 
+                if (localStorage.getItem("authToken")) {
+                    openModal(courtId, `${selectedDate} ${timeCell}`);
+                }
+                console.log("date was NOT selected", selectedDate);
+                
             }
-            if (selectedDate) {
+
                 console.log('Cell clicked:', event.target);
                 console.log('Cell clicked data:', selectedDate);
-            }
+            
 
 
 
@@ -147,6 +169,7 @@ const injectReservationCellEvents = () => {
 
 
 function openModal(courtId, selectedDate) {
+
     const backdrop = document.getElementById('backdrop-reservation');
     const modal = document.getElementById('reservationModal');
 
@@ -155,6 +178,9 @@ function openModal(courtId, selectedDate) {
 
     document.getElementById('hiddenCourtId').value = courtId;
     document.getElementById('hiddenSelectedDate').value = selectedDate;
+
+    document.getElementById('hiddenToken').value = localStorage.getItem("authToken"); // Replace dynamically if needed
+
 
     backdrop.classList.add('show');
     modal.classList.add('show');

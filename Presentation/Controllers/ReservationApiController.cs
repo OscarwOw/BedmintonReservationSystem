@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.ViewModels;
 
 namespace Presentation.Controllers
 {
@@ -24,10 +25,10 @@ namespace Presentation.Controllers
             return Ok(reservations);
         }
 
-        [HttpPost]
-        public IActionResult DeleteReservation(string token, int reservationId)
+        [HttpPost("delete")]
+        public IActionResult DeleteReservation([FromBody] DeleteReservationRequest request)
         {
-            bool result = _reservationService.DeleteReservation(token, reservationId);
+            bool result = _reservationService.DeleteReservation(request.Token, request.ReservationId);
             if (result)
             {
                 return Ok();
@@ -37,11 +38,16 @@ namespace Presentation.Controllers
                 return BadRequest();
             }  
         }
-        [HttpPost]
-        public IActionResult AddReservation(string token, DateTime startTime, int courtId)
+        [HttpPost("add")]
+        public IActionResult AddReservation([FromBody] AddReservationRequest request)
         {
-            Reservation reservation = new() { StartTime = startTime, CourtId = courtId };
-            bool result = _reservationService.AddReservation(token, reservation);
+            if (!DateTime.TryParse(request.StartTime, out var parsedStartTime))
+            {
+                return BadRequest("Invalid date format");
+            }
+
+            Reservation reservation = new() { StartTime = parsedStartTime, CourtId = request.CourtId };
+            bool result = _reservationService.AddReservation(request.Token, reservation);
             if (result)
             {
                 return Ok();

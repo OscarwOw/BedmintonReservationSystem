@@ -96,13 +96,13 @@ namespace DataAccess.Repositories
 
         public bool AddReservation(Reservation reservation)
         {
-            var query = @" INSERT INTO ""Reservation"" (""UserId"", ""CourtId"", ""StartTime"") VALUES (@UserId, @CourtId, @StartTime)";
+            var query = @" INSERT INTO ""Reservation"" (""userid"", ""courtid"", ""starttime"") VALUES (@userid, @courtid, @starttime)";
 
             var parameters = new Dictionary<string, object>
             {
-                { "@UserId", reservation.UserId },
-                { "@CourtId", reservation.CourtId },
-                { "@StartTime", reservation.StartTime }
+                { "@userid", reservation.UserId },
+                { "@courtid", reservation.CourtId },
+                { "@starttime", reservation.StartTime }
             };
 
             var rowsAffected = _databaseAccess.ExecuteNonQuery(query, parameters);
@@ -112,11 +112,11 @@ namespace DataAccess.Repositories
 
         public bool DeleteReservation(int reservationId)
         {
-            var query = @" DELETE FROM ""Reservation""  WHERE ""Id"" = @Id";
+            var query = @" DELETE FROM ""Reservation""  WHERE ""id"" = @id";
 
             var parameters = new Dictionary<string, object>
             {
-                { "@Id", reservationId }
+                { "@id", reservationId }
             };
 
             var rowsAffected = _databaseAccess.ExecuteNonQuery(query, parameters);

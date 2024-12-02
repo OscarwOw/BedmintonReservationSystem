@@ -14,4 +14,47 @@
     <p><strong>Court:</strong> @Model.Court</p>
 </div>
 
-<a href="#">Delete</a>
+<a href="#" id="deleteReservationButton">Delete</a>
+
+<script>
+    async function deleteReservation() {
+        console.log("Deleting reservation");
+        const reservationId = "@Model.Id"; 
+        const token = localStorage.getItem("authToken"); 
+
+        if (!reservationId || !token) {
+            console.error("Required data is missing.");
+            return;
+        }
+
+        console.log("Reservation ID:", reservationId);
+        console.log("Token:", token);
+
+        try {
+            const response = await fetch('/api/ReservationApi/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    token: token,                
+                    reservationId: reservationId 
+                }),
+            });
+
+            if (response.ok) {
+                console.log("Reservation deleted successfully");
+                window.location.href = '/home';
+            } else {
+                console.error("Failed to delete reservation:", await response.text());
+            }
+        } catch (error) {
+            console.error("Error during reservation deletion:", error);
+        }
+    }
+
+    document.getElementById("deleteReservationButton").addEventListener("click", async (event) => {
+        event.preventDefault(); 
+        await deleteReservation(); 
+    });
+</script>

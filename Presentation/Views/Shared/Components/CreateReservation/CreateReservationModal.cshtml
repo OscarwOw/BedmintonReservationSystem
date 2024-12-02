@@ -8,13 +8,61 @@
                 </p>
             </div>
             <div class="modal-actions">
-                <form id="createReservationForm" method="POST" action="/api/reservations">
+                <form id="createReservationForm" method="POST" action="/api/ReservationApi/add">
                     <input type="hidden" id="hiddenCourtId" name="courtId">
-                    <input type="hidden" id="hiddenSelectedDate" name="selectedDate">
+                    <input type="hidden" id="hiddenSelectedDate" name="startTime">
+                    <input type="hidden" id="hiddenToken" name="token" value="">
                     <button type="submit" class="btn btn-confirm">Create Reservation</button>
                 </form>
+
                 <button type="button" class="btn btn-cancel" data-modal="reservationModal">Close</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    async function createReservation() {
+        console.log("creating reservation");
+        const courtId = document.getElementById("hiddenCourtId").value;
+        const startTime = document.getElementById("hiddenSelectedDate").value;
+        const token = document.getElementById("hiddenToken").value;
+
+        if (!courtId || !startTime || !token) {
+            console.error("Form data is incomplete.");
+            return;
+        }
+
+        console.log("court id: ",courtId);
+        console.log("start Time: ",startTime);
+        console.log("token: ",token);
+        try {
+            const response = await fetch('/api/ReservationApi/add', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json', 
+                },
+                body: JSON.stringify({
+                    token: token,           
+                    startTime: startTime,   
+                    courtId: courtId        
+                }),
+            });
+
+            if (response.ok) {
+                console.log("Reservation created successfully");
+                window.location.href = '/home';
+            } else {
+                console.error("Failed to create reservation:", await response.text());
+            }
+        } catch (error) {
+            console.error("Error during reservation creation:", error);
+        }
+    }
+
+    document.querySelector(".btn.btn-confirm").addEventListener("click", async (event) => {
+        event.preventDefault(); 
+        await createReservation(); 
+    });
+
+</script>
