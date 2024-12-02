@@ -115,7 +115,7 @@ namespace Application.BusinessLogic
                 return false;
             }
             Court court = _courtRepository.GetCourtById(reservation.CourtId);
-            if(court == null)
+            if(court is null)
             {
                 return false;
             }
