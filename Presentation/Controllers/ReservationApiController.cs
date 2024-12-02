@@ -40,6 +40,7 @@ namespace Presentation.Controllers
         [HttpPost]
         public IActionResult AddReservation(string token, DateTime startTime, int courtId)
         {
+            Reservation reservation = new() { StartTime = startTime, CourtId = courtId };
             bool result = _reservationService.AddReservation(token, reservation);
             if (result)
             {
