@@ -1,0 +1,20 @@
+﻿<div class="backdrop" id="backdrop-reservation">
+    <div class="modal" id="reservationModal">
+        <div class="modal-content">
+            <span class="close" data-modal="reservationModal">&times;</span>
+            <div class="modal-text">
+                <p>
+                    Do you want to create a reservation on court <span id="modalCourtId"></span> at <span id="modalSelectedDate"></span>?
+                </p>
+            </div>
+            <div class="modal-actions">
+                <form id="createReservationForm" method="POST" action="/api/reservations">
+                    <input type="hidden" id="hiddenCourtId" name="courtId">
+                    <input type="hidden" id="hiddenSelectedDate" name="selectedDate">
+                    <button type="submit" class="btn btn-confirm">Create Reservation</button>
+                </form>
+                <button type="button" class="btn btn-cancel" data-modal="reservationModal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

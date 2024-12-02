@@ -272,7 +272,6 @@ form {
 
 
 
-/* reservation table */
 #ReservationTable table {
     width: 100%; 
     border-collapse: collapse; 
@@ -306,14 +305,13 @@ form {
         cursor: pointer;
     }
 
-/* Styles for reservation types */
 .reservation {
-    background-color: #add8e6; /* Light blue for reserved slots */
+    background-color: #add8e6; 
     color: #333;
 }
 
 .myreservation {
-    background-color: #90ee90; /* Light green for user’s reservations */
+    background-color: #90ee90; 
     color: #333;
 }
 
@@ -321,4 +319,31 @@ form {
     background-color: #ffb6c1; 
     border: 2px solid red; 
 }
+
+.modal-text {
+    font-size: 1rem;
+    color: #333; 
+    text-align: center;
+    margin-bottom: 20px; 
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center; 
+    gap: 10px; 
+    margin-top: 20px; 
+}
+
+.btn-confirm {
+    width: 100%; 
+    max-width: 150px; 
+}
+
+.btn-cancel {
+    width: 100%; 
+    max-width: 150px; 
+}
+
+
+
 

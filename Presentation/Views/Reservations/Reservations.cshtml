@@ -35,19 +35,23 @@
                     <td>@hour:00</td> 
                     @foreach (var court in Model.Keys)
                     {
+                        
                         var reservation = Model[court].FirstOrDefault(r => r.StartTime.Hour == hour);
                         if (reservation != null)
                         {
                             <td class="reservation reservation-cell"
                                 data-userid="@reservation.UserId"
                                 data-reservationid="@reservation.Id"
+                                data-courtid="@court"
                             >
                                 Booked
                             </td>
                         }
                         else
                         {
-                            <td class="reservation-cell"></td>
+                            <td class="reservation-cell"
+                                data-courtid="@court"
+                            ></td>
                         }
                     }
                 </tr>
@@ -55,6 +59,10 @@
         </tbody>
     </table>
 
+</div>
+
+<div id="ReservationModalContainer">
+    @await Component.InvokeAsync("CreateReservation")
 </div>
 
 

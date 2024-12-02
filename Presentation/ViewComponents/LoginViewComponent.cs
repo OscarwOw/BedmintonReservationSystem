@@ -21,20 +21,5 @@ namespace BedmintonReservationSystem.ViewComponents
             return View("LoginRegisterModal");
         }
 
-
-        //[HttpPost]
-        //public IActionResult Login(string username, string password)
-        //{
-        //    var result = _loginService.Login(username, password);
-        //    if (result == "Success")
-        //    {
-        //        return Json(new { success = true, message = "Login successful!" });
-        //    }
-        //    else
-        //    {
-        //        return Json(new { success = false, message = "Invalid credentials." });
-        //    }
-        //}
-
     }
 }
