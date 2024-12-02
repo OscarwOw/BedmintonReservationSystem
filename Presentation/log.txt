@@ -1,0 +1,99 @@
+Info: Executing GetCourtsByLocation query
+Info: Executing GetReservationsByDate query
+Info: Executing GetCourtsByLocation query
+Info: Executing GetReservationsByDate query
+Info: Executing GetCourtsByLocation query
+Info: Executing GetUserByName query| at 2. 12. 2024 15:08:59
+Info: user adam sucesfuly logged in with token 2t1029793039| at 2. 12. 2024 15:09:00
+Info: token 2t1029793039 sucesfuly authorized| at 2. 12. 2024 15:09:00
+Info: Executing GetReservationsByDate query| at 2. 12. 2024 15:09:02
+Info: Executing GetCourtsByLocation query| at 2. 12. 2024 15:09:02
+Info: token 2t1029793039 sucesfuly authorized| at 2. 12. 2024 15:09:02
+Info: Executing GetCourtById query| at 2. 12. 2024 15:09:04
+Info: Executing AddReservation query| at 2. 12. 2024 15:09:05
+Info: Executing GetReservationsByDate query| at 2. 12. 2024 15:09:06
+Info: Executing GetCourtsByLocation query| at 2. 12. 2024 15:09:06
+Info: Executing GetUserByName query| at 2. 12. 2024 15:09:11
+Info: user adam sucesfuly logged in with token 2t1070211974| at 2. 12. 2024 15:09:11
+Info: token 2t1070211974 sucesfuly authorized| at 2. 12. 2024 15:09:11
+Info: Executing GetReservationsByDate query| at 2. 12. 2024 15:09:13
+Info: Executing GetCourtsByLocation query| at 2. 12. 2024 15:09:13
+Info: token 2t1070211974 sucesfuly authorized| at 2. 12. 2024 15:09:13
+Info: token 2t1070211974 sucesfuly authorized| at 2. 12. 2024 15:09:15
+Info: Executing GetReservationById query| at 2. 12. 2024 15:09:15
+Info: Executing GetReservationById query| at 2. 12. 2024 15:09:16
+Info: Executing DeleteReservation query| at 2. 12. 2024 15:09:16
+Info: Executing GetUserByName query| at 2. 12. 2024 15:09:22
+Info: user adam sucesfuly logged in with token 2t1743698290| at 2. 12. 2024 15:09:22
+Info: token 2t1743698290 sucesfuly authorized| at 2. 12. 2024 15:09:22
+Info: Executing GetReservationsByDate query| at 2. 12. 2024 15:09:24
+Info: Executing GetCourtsByLocation query| at 2. 12. 2024 15:09:24
+Info: token 2t1743698290 sucesfuly authorized| at 2. 12. 2024 15:09:24
+Info: user logout with token 2t1743698290| at 2. 12. 2024 15:09:27
+Info: | at 2. 12. 2024 15:11:17Executing GetUserByName query
+Info: | at 2. 12. 2024 15:11:17user adam sucesfuly logged in with token 2t953660668
+Info: | at 2. 12. 2024 15:11:17token 2t953660668 sucesfuly authorized
+Info: | at 2. 12. 2024 15:11:19token 2t953660668 sucesfuly authorized
+Info: | at 2. 12. 2024 15:11:19Executing GetReservationsByUser query
+Info: | at 2. 12. 2024 15:11:20Executing GetReservationsByDate query
+Info: | at 2. 12. 2024 15:11:20Executing GetCourtsByLocation query
+Info: | at 2. 12. 2024 15:11:20token 2t953660668 sucesfuly authorized
+Info: | at 2. 12. 2024 15:11:23Executing GetCourtById query
+Info: | at 2. 12. 2024 15:11:23Executing AddReservation query
+Info: | at 2. 12. 2024 15:11:29Executing GetUserByName query
+Info: | at 2. 12. 2024 15:11:29user adam sucesfuly logged in with token 2t1580673035
+Info: | at 2. 12. 2024 15:11:29token 2t1580673035 sucesfuly authorized
+Info: | at 2. 12. 2024 15:11:30Executing GetReservationsByDate query
+Info: | at 2. 12. 2024 15:11:30Executing GetCourtsByLocation query
+Info: | at 2. 12. 2024 15:11:30token 2t1580673035 sucesfuly authorized
+Info: | at 2. 12. 2024 15:11:32token 2t1580673035 sucesfuly authorized
+Info: | at 2. 12. 2024 15:11:32Executing GetReservationById query
+Info: | at 2. 12. 2024 15:11:36Executing GetReservationById query
+Info: | at 2. 12. 2024 15:11:36Executing DeleteReservation query
+Info: | at 2. 12. 2024 15:11:37Executing GetReservationsByDate query
+Info: | at 2. 12. 2024 15:11:37Executing GetCourtsByLocation query
+Info: | at 2. 12. 2024 15:11:50Executing GetUserByName query
+Info: | at 2. 12. 2024 15:11:50user adam sucesfuly logged in with token 2t653220625
+Info: | at 2. 12. 2024 15:11:50token 2t653220625 sucesfuly authorized
+Info: | at 2. 12. 2024 15:11:51Executing GetReservationsByDate query
+Info: | at 2. 12. 2024 15:11:52Executing GetCourtsByLocation query
+Info: | at 2. 12. 2024 15:11:52token 2t653220625 sucesfuly authorized
+Info: | at 2. 12. 2024 15:11:55Executing GetReservationsByDate query
+Info: | at 2. 12. 2024 15:11:55Executing GetCourtsByLocation query
+Info: | at 2. 12. 2024 15:11:56Executing GetReservationsByDate query
+Info: | at 2. 12. 2024 15:11:56Executing GetCourtsByLocation query
+Info: | at 2. 12. 2024 15:11:56Executing GetReservationsByDate query
+Info: | at 2. 12. 2024 15:11:56Executing GetCourtsByLocation query
+Info: | at 2. 12. 2024 15:11:56Executing GetReservationsByDate query
+Info: | at 2. 12. 2024 15:11:56Executing GetCourtsByLocation query
+Info: | at 2. 12. 2024 15:11:57Executing GetReservationsByDate query
+Info: | at 2. 12. 2024 15:11:57Executing GetCourtsByLocation query
+Info: | at 2. 12. 2024 15:11:58Executing GetReservationsByDate query
+Info: | at 2. 12. 2024 15:11:58Executing GetCourtsByLocation query
+Info: | at 2. 12. 2024 15:11:59Executing GetReservationsByDate query
+Info: | at 2. 12. 2024 15:11:59Executing GetCourtsByLocation query
+Info: | at 2. 12. 2024 15:12:01Executing GetReservationsByDate query
+Info: | at 2. 12. 2024 15:12:01Executing GetCourtsByLocation query
+Info: | at 2. 12. 2024 15:12:02Executing GetReservationsByDate query
+Info: | at 2. 12. 2024 15:12:02Executing GetCourtsByLocation query
+Info: | at 2. 12. 2024 15:12:04token 2t653220625 sucesfuly authorized
+Info: | at 2. 12. 2024 15:12:04Executing GetReservationById query
+Info: | at 2. 12. 2024 15:12:06user logout with token 2t653220625
+2. 12. 2024 15:13:56 | Info: Executing GetUserByName query
+2. 12. 2024 15:13:57 | Info: user adam sucesfuly logged in with token 2t1787578670
+2. 12. 2024 15:13:57 | Info: token 2t1787578670 sucesfuly authorized
+2. 12. 2024 15:13:58 | Info: Executing GetReservationsByDate query
+2. 12. 2024 15:13:58 | Info: Executing GetCourtsByLocation query
+2. 12. 2024 15:13:58 | Info: token 2t1787578670 sucesfuly authorized
+2. 12. 2024 15:14:01 | Info: Executing GetCourtById query
+2. 12. 2024 15:14:01 | Info: Executing AddReservation query
+2. 12. 2024 15:14:07 | Info: Executing GetUserByName query
+2. 12. 2024 15:14:07 | Info: user adam sucesfuly logged in with token 2t979399360
+2. 12. 2024 15:14:07 | Info: token 2t979399360 sucesfuly authorized
+2. 12. 2024 15:14:08 | Info: Executing GetReservationsByDate query
+2. 12. 2024 15:14:08 | Info: Executing GetCourtsByLocation query
+2. 12. 2024 15:14:08 | Info: token 2t979399360 sucesfuly authorized
+2. 12. 2024 15:14:09 | Info: token 2t979399360 sucesfuly authorized
+2. 12. 2024 15:14:09 | Info: Executing GetReservationById query
+2. 12. 2024 15:14:10 | Info: Executing GetReservationById query
+2. 12. 2024 15:14:11 | Info: Executing DeleteReservation query

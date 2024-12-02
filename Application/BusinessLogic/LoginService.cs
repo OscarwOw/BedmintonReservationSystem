@@ -13,9 +13,12 @@ namespace Application.BusinessLogic
     {
         IUserRepository _userRepository;
         ILoginCacheService _loginCacheService;
-        public LoginService(IUserRepository userRepository, ILoginCacheService loginCacheService) {
+        private readonly ICustomLogger _customLogger;
+        public LoginService(IUserRepository userRepository, ILoginCacheService loginCacheService, ICustomLogger customLogger)
+        {
             _userRepository = userRepository;
             _loginCacheService = loginCacheService;
+            _customLogger = customLogger;
         }
 
         public bool Authorize(string token)
@@ -30,6 +33,7 @@ namespace Application.BusinessLogic
             {
                 if(userinfo.Value.Item3 == token)
                 {
+                    _customLogger.Info($"token {token} sucesfuly authorized");
                     return true;
                 }
             }
@@ -51,6 +55,7 @@ namespace Application.BusinessLogic
                 sb.Append(user.Id).Append("t").Append(authToken);
                 string jwt = sb.ToString();
                 _loginCacheService.AddOrUpdateUser(user.Id, jwt);
+                _customLogger.Info($"user {user.Name} sucesfuly logged in with token {jwt}");
                 return (1, user.Id, jwt);
             }
             return (-1, -1, "");
@@ -59,7 +64,28 @@ namespace Application.BusinessLogic
         public void Logout(string token)
         {
             int userid = Int32.Parse(token.Split("t")[0]);
+            _customLogger.Info($"user logout with token {token}");
             _loginCacheService.RemoveUser(userid);
+        }
+
+        public bool Register(User user)
+        {
+            User existingUser = _userRepository.GetUserByName(user.Name);
+            if (existingUser is not null)
+            {
+                return false;
+            }
+            if (user.Password.Length < 3)
+            {
+                return false;
+            }
+            if (_userRepository.CreateUser(user))
+            {
+                _customLogger.Info($"sucesfuly registred user with name: {user.Name}");
+                return true;
+            }
+            return false;
+
         }
     }
 }

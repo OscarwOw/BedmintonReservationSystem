@@ -1,4 +1,6 @@
 ﻿using Application.Interfaces;
+using DataAccess.Entities;
+using DataAccess.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.ViewModels;
@@ -10,10 +12,12 @@ namespace Presentation.Controllers
     public class LoginApiController : ControllerBase
     {
         private readonly ILoginService _loginService;
+        private readonly ICustomLogger _customLogger;
 
-        public LoginApiController(ILoginService loginService)
+        public LoginApiController(ILoginService loginService, ICustomLogger customLogger)
         {
             _loginService = loginService;
+            _customLogger = customLogger;
         }
 
         [HttpPost("Authenticate")]
@@ -32,6 +36,23 @@ namespace Presentation.Controllers
             else
             {
                 return BadRequest(new { success = false, message = "Invalid username or password" });
+            }
+        }
+        [HttpPost("Register")]
+        public IActionResult Register([FromBody] RegisterViewModel model)
+        {
+            if(model.Password != model.RepeatPassword)
+            {
+                BadRequest();
+            }
+            User user = new() { Name = model.Name, Password = model.Password };
+            if (_loginService.Register(user))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
             }
         }
 

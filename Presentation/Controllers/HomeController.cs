@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using DataAccess.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
@@ -6,9 +7,11 @@ namespace Presentation.Controllers
     public class HomeController : Controller
     {
         ILoginService _loginService;
-        public HomeController(ILoginService loginService)
+        private readonly ICustomLogger _customLogger;
+        public HomeController(ILoginService loginService, ICustomLogger customLogger)
         {
             _loginService = loginService;
+            _customLogger = customLogger;
         }
 
         public IActionResult Index(string token)

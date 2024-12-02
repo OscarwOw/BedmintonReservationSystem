@@ -16,11 +16,13 @@ namespace Application.BusinessLogic
         private IReservationRepository _reservationRepository;
         private ICourtRepository _courtRepository;
         private ILoginCacheService _loginCacheService;
-        public ReservationService(IReservationRepository reservationRepository, ICourtRepository courtRepository, ILoginCacheService loginCacheService) 
+        private readonly ICustomLogger _customLogger;
+        public ReservationService(IReservationRepository reservationRepository, ICourtRepository courtRepository, ILoginCacheService loginCacheService, ICustomLogger customLogger) 
         {
             _reservationRepository = reservationRepository;
             _courtRepository = courtRepository;
             _loginCacheService = loginCacheService;
+            _customLogger = customLogger;
         }
         public List<Reservation> GetAllReservations()
         {

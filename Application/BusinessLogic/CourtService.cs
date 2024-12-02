@@ -12,9 +12,11 @@ namespace Application.BusinessLogic
     public class CourtService : ICourtService
     {
         private readonly ICourtRepository _courtRepository;
-        public CourtService(ICourtRepository courtRepository)
+        private readonly ICustomLogger _customLogger;
+        public CourtService(ICourtRepository courtRepository, ICustomLogger customLogger)
         {
             _courtRepository = courtRepository;
+            _customLogger = customLogger;
         }
         public List<Court> GetCourts()
         {

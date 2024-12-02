@@ -21,17 +21,18 @@
             </div>
             <div id="register-content" class="register-content">
                 <h2>Register</h2>
-                <form method="post" asp-page="/Register">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required />
-                    <label for="password">Password:</label>
-                    <input type="password" id="registration-password" name="password" required />
-                    <label for="password">Repeat Password:</label>
-                    <input type="password" id="repeat-password" name="repeat-password" required />
-                    
+                <form id="registerForm">
+                    <label for="register-username">Username:</label>
+                    <input type="text" id="register-username" name="username" required />
+                    <label for="register-password">Password:</label>
+                    <input type="password" id="register-password" name="password" required />
+                    <label for="repeat-password">Repeat Password:</label>
+                    <input type="password" id="register-repeat-password" name="repeatPassword" required />
+                    <div id="register-feedback"></div>
                     <button type="submit">Register</button>
                 </form>
             </div>
+
         </div>
     </div>
 </div>

@@ -11,9 +11,11 @@ namespace DataAccess.Repositories
     public class ReservationRepository : IReservationRepository
     {
         private readonly IDatabaseAccess _databaseAccess;
-        public ReservationRepository(IDatabaseAccess databaseAccess)
+        private readonly ICustomLogger _customLogger;
+        public ReservationRepository(IDatabaseAccess databaseAccess, ICustomLogger customLogger)
         {
             _databaseAccess = databaseAccess;
+            _customLogger = customLogger;
         }
 
         public Reservation? GetReservationById(int id)
@@ -29,6 +31,7 @@ namespace DataAccess.Repositories
                 WHERE r.id = @id";
 
             var parameters = new Dictionary<string, object> { { "@id", id } };
+            _customLogger.Info("Executing GetReservationById query");
             return _databaseAccess.ExecuteQueryToList<Reservation>(query, parameters).FirstOrDefault();
         }
 
@@ -41,6 +44,7 @@ namespace DataAccess.Repositories
                 WHERE r.courtid = @courtid";
 
             var parameters = new Dictionary<string, object> { { "@courtid", courtId } };
+            _customLogger.Info("Executing GetReservationsByCourt query");
             return _databaseAccess.ExecuteQueryToList<Reservation>(query, parameters);
         }
 
@@ -53,6 +57,7 @@ namespace DataAccess.Repositories
                 WHERE DATE(r.starttime) = @date";
 
             var parameters = new Dictionary<string, object> { { "@date", dateTime.Date } };
+            _customLogger.Info("Executing GetReservationsByDate query");
             return _databaseAccess.ExecuteQueryToList<Reservation>(query, parameters);
         }
 
@@ -65,6 +70,7 @@ namespace DataAccess.Repositories
                 WHERE r.userid = @userid";
 
             var parameters = new Dictionary<string, object> { { "@userid", userId } };
+            _customLogger.Info("Executing GetReservationsByUser query");
             return _databaseAccess.ExecuteQueryToList<Reservation>(query, parameters);
         }
 
@@ -81,6 +87,7 @@ namespace DataAccess.Repositories
                 { "@userid", userId },
                 { "@date", dateTime.Date }
             };
+            _customLogger.Info("Executing GetReservationsByUserByDate query");
             return _databaseAccess.ExecuteQueryToList<Reservation>(query, parameters);
         }
 
@@ -91,6 +98,7 @@ namespace DataAccess.Repositories
                     r.id, r.userid, r.courtid, r.starttime
                 FROM ""Reservation"" r";
 
+            _customLogger.Info("Executing GetReservations query");
             return _databaseAccess.ExecuteQueryToList<Reservation>(query);
         }
 
@@ -106,6 +114,7 @@ namespace DataAccess.Repositories
             };
 
             var rowsAffected = _databaseAccess.ExecuteNonQuery(query, parameters);
+            _customLogger.Info("Executing AddReservation query");
             return rowsAffected > 0; 
         }
 
@@ -120,6 +129,7 @@ namespace DataAccess.Repositories
             };
 
             var rowsAffected = _databaseAccess.ExecuteNonQuery(query, parameters);
+            _customLogger.Info("Executing DeleteReservation query");
             return rowsAffected > 0; 
         }
 

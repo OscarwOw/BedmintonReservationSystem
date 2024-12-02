@@ -56,6 +56,72 @@ window.attachLoginEvent = function () {
     });
 }
 
+
+
+window.attachRegisterEvent = function () {
+    document.getElementById("registerForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const name = document.getElementById("register-username").value;
+        const password = document.getElementById("register-password").value;
+        const repeatPassword = document.getElementById("register-repeat-password").value;
+
+        const feedbackDiv = document.getElementById("register-feedback");
+
+        if (!name || !password || !repeatPassword) {
+            feedbackDiv.textContent = "All fields are required.";
+            feedbackDiv.style.color = "red";
+            return;
+        }
+
+        if (password !== repeatPassword) {
+            feedbackDiv.textContent = "Passwords do not match.";
+            feedbackDiv.style.color = "red";
+            return;
+        }
+
+        console.log("sending request to /api/LoginApi/Register");
+        try {
+            const response = await fetch('/api/LoginApi/Register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    password: password,
+                    repeatPassword: repeatPassword
+                }),
+            });
+
+            if (response.ok) {
+                feedbackDiv.textContent = "Registration successful!";
+                feedbackDiv.style.color = "green";
+
+
+                //document.getElementById("login-content").classList.add("active");
+                //document.getElementById("register-content").classList.remove("active");
+
+                window.location.href = '/home';
+            } else {
+                const error = await response.json();
+                feedbackDiv.textContent = error.message || "Registration failed.";
+                feedbackDiv.style.color = "red";
+            }
+        } catch (error) {
+            feedbackDiv.textContent = "Error during registration. Please try again.";
+            feedbackDiv.style.color = "red";
+            console.error("Error during registration:", error);
+        }
+    });
+};
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
-    attachLoginEvent(); 
+    attachLoginEvent();
+    attachRegisterEvent();
 });

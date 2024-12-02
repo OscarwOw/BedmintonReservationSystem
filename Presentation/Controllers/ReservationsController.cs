@@ -1,5 +1,6 @@
 ﻿using Application.BusinessLogic;
 using Application.Interfaces;
+using DataAccess.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
@@ -8,10 +9,12 @@ namespace Presentation.Controllers
     {
         private IReservationService _reservationService;
         private ILoginService _loginService;
-        public ReservationsController(IReservationService reservationService, ILoginService loginService)
+        private readonly ICustomLogger _customLogger;
+        public ReservationsController(IReservationService reservationService, ILoginService loginService, ICustomLogger customLogger)
         {
             _reservationService = reservationService;
             _loginService = loginService;
+            _customLogger = customLogger;
         }
 
         [HttpPost]

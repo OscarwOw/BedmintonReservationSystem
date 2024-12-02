@@ -11,10 +11,12 @@ namespace DataAccess.Repositories
     public class CourtRepository : ICourtRepository
     {
         private readonly IDatabaseAccess _databaseAccess;
+        private readonly ICustomLogger _customLogger;
 
-        public CourtRepository(IDatabaseAccess databaseAccess)
+        public CourtRepository(IDatabaseAccess databaseAccess, ICustomLogger customLogger)
         {
             _databaseAccess = databaseAccess;
+            _customLogger = customLogger;
         }
         public Court GetCourtById(int id)
         {
@@ -25,6 +27,7 @@ namespace DataAccess.Repositories
                 WHERE c.id = @id";
 
             var parameters = new Dictionary<string, object> { { "@id", id } };
+            _customLogger.Info("Executing GetCourtById query");
             return _databaseAccess.ExecuteQueryToList<Court>(query, parameters).FirstOrDefault();
         }
 
@@ -37,6 +40,7 @@ namespace DataAccess.Repositories
                 WHERE c.name = @name";
 
             var parameters = new Dictionary<string, object> { { "@name", name } };
+            _customLogger.Info("Executing GetCourtByName query");
             return _databaseAccess.ExecuteQueryToList<Court>(query, parameters).FirstOrDefault();
         }
 
@@ -59,6 +63,7 @@ namespace DataAccess.Repositories
                 WHERE c.location = @location";
 
             var parameters = new Dictionary<string, object> { { "@location", location } };
+            _customLogger.Info("Executing GetCourtsByLocation query");
             return _databaseAccess.ExecuteQueryToList<Court>(query, parameters);
         }
     }

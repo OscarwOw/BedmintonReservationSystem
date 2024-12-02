@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using DataAccess.Interfaces;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.ViewModels;
@@ -10,10 +11,12 @@ namespace Presentation.Controllers
     public class ReservationApiController : ControllerBase
     {
         private readonly IReservationService _reservationService;
+        private readonly ICustomLogger _customLogger;
 
-        public ReservationApiController(IReservationService reservationService)
+        public ReservationApiController(IReservationService reservationService, ICustomLogger customLogger)
         {
             _reservationService = reservationService;
+            _customLogger = customLogger;
         }
 
         [HttpGet]

@@ -3,6 +3,7 @@ using DataAccess.Repositories;
 using DataAccess;
 using Application.Interfaces;
 using Application.BusinessLogic;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Presentation
 {
@@ -13,6 +14,7 @@ namespace Presentation
             //singletons
             services.AddSingleton<IDatabaseAccess>(new DatabaseAccess(connectionString));
             services.AddSingleton<ILoginCacheService>(new LoginCacheService());
+            services.AddSingleton<ICustomLogger>(new CustomLogger());
             
 
             //Repositories
