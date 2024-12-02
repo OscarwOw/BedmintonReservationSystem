@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using DataAccess.Entities;
 using DataAccess.Interfaces;
 using DataAccess.Models;
 using DataAccess.Repositories;
@@ -14,10 +15,12 @@ namespace Application.BusinessLogic
     {
         private IReservationRepository _reservationRepository;
         private ICourtRepository _courtRepository;
-        public ReservationService(IReservationRepository reservationRepository, ICourtRepository courtRepository) 
+        private ILoginCacheService _loginCacheService;
+        public ReservationService(IReservationRepository reservationRepository, ICourtRepository courtRepository, ILoginCacheService loginCacheService) 
         {
             _reservationRepository = reservationRepository;
             _courtRepository = courtRepository;
+            _loginCacheService = loginCacheService;
         }
         public List<Reservation> GetAllReservations()
         {
@@ -53,6 +56,71 @@ namespace Application.BusinessLogic
         public Reservation GetReservationById(int ReservationId)
         {
             return _reservationRepository.GetReservationById(ReservationId);
+        }
+
+        public bool DeleteReservation(string token, int reservationId)
+        {
+            Reservation reservation = _reservationRepository.GetReservationById(reservationId);
+            if(reservation is null){
+                return false;
+            }
+            int tokenUserId = Int32.Parse(token.Split('t')[0]); 
+            if(reservation.UserId != tokenUserId)
+            {
+                return false;
+            }
+
+            (DateTime, DateTime, string)? userinfo = _loginCacheService.GetUserInfo(tokenUserId);
+            if (userinfo.HasValue)
+            {
+                if (userinfo.Value.Item3 == token)
+                {
+                    _reservationRepository.DeleteReservation(reservationId);
+                    return true;
+                }
+            }
+            return false;           
+        }
+
+        public bool AddReservation(string token, Reservation reservation)
+        {
+            if(reservation == null)
+            {
+                return false;
+            }
+            int UserId = Int32.Parse(token.Split('t')[0]);
+            (DateTime, DateTime, string)? userinfo = _loginCacheService.GetUserInfo(UserId);
+            if (userinfo.HasValue)
+            {
+                if (userinfo.Value.Item3 == token)
+                {
+                    reservation.UserId = UserId;
+                    if(checkReservationValues(reservation))
+                    {
+                        _reservationRepository.AddReservation(reservation);
+                        return true;
+                    }
+
+                    
+                }
+            }
+            return false;
+        }
+
+
+        private bool checkReservationValues(Reservation reservation)
+        {
+            if(reservation.StartTime != DateTime.Now) // is whole hour
+            {
+                return false;
+            }
+            Court court = _courtRepository.GetCourtById(reservation.CourtId);
+            if(court == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

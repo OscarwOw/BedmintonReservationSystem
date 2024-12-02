@@ -102,6 +102,7 @@
     if (loginModal) {
         loginModal.addEventListener('click', (event) => {
             event.stopPropagation();
+
         });
     }
     attachLogoutEvent();
@@ -155,7 +156,7 @@ async function performLogout() {
 
 function attachLogoutEvent() {
     const logoutLink = document.getElementById('logout');
-
+ 
     if (logoutLink) {
         logoutLink.addEventListener('click', async (event) => {
             event.preventDefault(); 

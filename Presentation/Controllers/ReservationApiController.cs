@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
@@ -21,6 +22,33 @@ namespace Presentation.Controllers
             var reservations = _reservationService.GetReservationsByDateAndLocation(date, location);
 
             return Ok(reservations);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteReservation(string token, int reservationId)
+        {
+            bool result = _reservationService.DeleteReservation(token, reservationId);
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }  
+        }
+        [HttpPost]
+        public IActionResult AddReservation(string token, DateTime startTime, int courtId)
+        {
+            bool result = _reservationService.AddReservation(token, reservation);
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }
