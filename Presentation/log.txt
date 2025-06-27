@@ -97,3 +97,23 @@ Info: | at 2. 12. 2024 15:12:06user logout with token 2t653220625
 2. 12. 2024 15:14:09 | Info: Executing GetReservationById query
 2. 12. 2024 15:14:10 | Info: Executing GetReservationById query
 2. 12. 2024 15:14:11 | Info: Executing DeleteReservation query
+27. 6. 2025 11:30:33 | Info: Executing GetReservationsByDate query
+27. 6. 2025 11:30:34 | Info: Executing GetCourtsByLocation query
+27. 6. 2025 11:30:45 | Info: Executing GetUserByName query
+27. 6. 2025 11:30:45 | Info: Executing CreateUser query
+27. 6. 2025 11:30:45 | Info: sucesfuly registred user with name: user1
+27. 6. 2025 11:30:52 | Info: Executing GetUserByName query
+27. 6. 2025 11:30:52 | Info: user user1 sucesfuly logged in with token 1t1707688180
+27. 6. 2025 11:30:53 | Info: token 1t1707688180 sucesfuly authorized
+27. 6. 2025 11:30:54 | Info: Executing GetReservationsByDate query
+27. 6. 2025 11:30:54 | Info: Executing GetCourtsByLocation query
+27. 6. 2025 11:30:54 | Info: token 1t1707688180 sucesfuly authorized
+27. 6. 2025 11:31:59 | Info: Executing GetReservationsByDate query
+27. 6. 2025 11:31:59 | Info: Executing GetCourtsByLocation query
+27. 6. 2025 11:31:59 | Info: token 1t1707688180 sucesfuly authorized
+27. 6. 2025 11:32:02 | Info: token 1t1707688180 sucesfuly authorized
+27. 6. 2025 11:32:02 | Info: Executing GetReservationsByDate query
+27. 6. 2025 11:32:02 | Info: Executing GetCourtsByLocation query
+27. 6. 2025 11:32:03 | Info: token 1t1707688180 sucesfuly authorized
+27. 6. 2025 11:32:03 | Info: token 1t1707688180 sucesfuly authorized
+27. 6. 2025 11:32:37 | Info: user logout with token 1t1707688180
